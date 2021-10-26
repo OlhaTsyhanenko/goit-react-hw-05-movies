@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-// import * as dataApi from '../../apiMovies';
+import { useParams, useRouteMatch, Route, NavLink } from "react-router-dom";
 import fetchDataMovie from '../../apiAboutMovie';
+import Cast from '../Cast/Cast';
+import Reviews from '../Reviews/Reviews';
 
 export default function HomePage() {
-    const {movieId}  = useParams();
-    //const movieId = 550988;
-    console.log(movieId);
+    const { movieId } = useParams();
+    const { url, path } = useRouteMatch();
     const [movie, setMovie] = useState(null);
 
     useEffect(() => {
@@ -28,6 +28,16 @@ export default function HomePage() {
                 </ul>
             </>
             }
+            <NavLink to={`${url}/cast`}>Cast</NavLink>
+            <NavLink to={`${url}/reviews`}>Reviews</NavLink>
+
+
+            <Route path={`${path}/cast`}>
+                <Cast /> 
+            </Route>
+            <Route path={`${path}/reviews`}>
+                <Reviews /> 
+            </Route>
         </>
     )
 }

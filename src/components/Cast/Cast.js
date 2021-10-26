@@ -1,6 +1,8 @@
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import fetchDataCast from '../../apiCast';
+import defaultImg from '../default.jpg';
+import styles from '../Cast/Cast.module.css';
 
 
 export default function Cast() {
@@ -15,12 +17,15 @@ export default function Cast() {
     return (
         <>
             {cast && <>
-                <ul>
+                <ul className={styles.imageGallery}>
                     {cast.map(el => {
                         if (el.known_for_department === 'Acting') {
                             return (
-                            <li key={el.id}>{el.name}
-                        <img src={`https://image.tmdb.org/t/p/w500${el.profile_path}`} alt={el.name} width="150" /></li>  
+                                <li key={el.id} className={styles.imageGalleryItem}>
+                                    {el.profile_path ? <img src={`https://image.tmdb.org/t/p/w500${el.profile_path}`} alt={el.name} className ={styles.imageGalleryItem__image} /> :
+                                        <img src={defaultImg} alt={el.name} className ={styles.imageGalleryItem__image} />}
+                                    <p className ={styles.imageGalleryItem__name}>{el.name}</p>
+                        </li>  
                           )                        
                         }  
                     }

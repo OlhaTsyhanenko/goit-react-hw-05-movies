@@ -1,0 +1,14 @@
+.name {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.updated_at {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.emptyReviews {
+  font-size: 18px;
+  font-weight: 600;
+}

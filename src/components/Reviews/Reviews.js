@@ -1,30 +1,33 @@
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import fetchDataRewiews from '../../apiRewiews';
+import styles from '../Reviews/Reviews.module.css';
 
 
-export default function Rewiews() {
+export default function Reviews() {
     const { movieId } = useParams();
-    const [rewiews, setRewiews] = useState(null);
+    const [reviews, setReviews] = useState([]);
     console.log(movieId);
 
     useEffect(() => {
-        fetchDataRewiews(movieId).then(setRewiews)
+        fetchDataRewiews(movieId).then(setReviews)
     }, [movieId])
-
+    
+    const emptyReviews = reviews.length === 0;
     return (
         <>
-            {rewiews && <>
+            {reviews && 
                 <ul>
-                    {rewiews.map(el =>
+                    {reviews.map(el =>
                         <li key={el.id}>
-                            <p>{el.author}</p>
-                            <p>{el.updated_at}</p>
+                            <p className={styles.name}>{el.author}</p>
+                            <p className={styles.updated_at}>{el.updated_at}</p>
                             <p>{el.content}</p>
                         </li>)}
-                </ul>
-                </>
+                </ul> 
             }
+            {emptyReviews && <p className={styles.emptyReviews}>We don't have any reviews for this movie!</p>}
+            
         </>
     )
 }

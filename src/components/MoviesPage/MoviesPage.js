@@ -1,9 +1,23 @@
+import { useEffect, useState } from "react";
+import { Link, useRouteMatch } from "react-router-dom";
+import fetchData from "../../apiMovies";
+// import * as dataApi from '../../apiMovies';
 
+export default function HomePage() {
+    const { url } = useRouteMatch();
+    const [movies, setMovies] = useState(null);
 
-const MoviesPage = () => {
+    useEffect(() => {
+        fetchData().then(setMovies)
+    }, [])
+    
     return (
-    <h1>Movies page</h1>
-    )    
+        <>
+            {movies && movies.map(movie =>
+                <li key={movie.id}>
+                    {/* <Link to={`${url}/${movie.id}`}>{movie.title}</Link> */}
+                    <Link to={`movies/${movie.id}`}>{movie.title}</Link>
+                </li>)}
+        </>
+    )
 }
-
-export default MoviesPage;

@@ -1,16 +1,17 @@
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import fetchDataRewiews from '../../apiRewiews';
+// import fetchDataRewiews from '../../apiRewiews';
+import * as fetchApi from '../../api';
 import styles from '../Reviews/Reviews.module.css';
 
 
 export default function Reviews() {
     const { movieId } = useParams();
     const [reviews, setReviews] = useState([]);
-    console.log(movieId);
+    // console.log(movieId);
 
     useEffect(() => {
-        fetchDataRewiews(movieId).then(setReviews)
+        fetchApi.fetchRewiews(movieId).then(setReviews)
     }, [movieId])
     
     const emptyReviews = reviews.length === 0;

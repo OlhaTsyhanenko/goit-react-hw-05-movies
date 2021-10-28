@@ -1,6 +1,5 @@
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-// import fetchDataRewiews from '../../apiRewiews';
 import * as fetchApi from '../../api';
 import styles from '../Reviews/Reviews.module.css';
 
@@ -18,9 +17,9 @@ export default function Reviews() {
     return (
         <>
             {reviews && 
-                <ul>
+                <ul >
                     {reviews.map(el =>
-                        <li key={el.id}>
+                        <li key={el.id} >
                             <p className={styles.name}>{el.author}</p>
                             <p className={styles.updated_at}>{el.updated_at}</p>
                             <p>{el.content}</p>

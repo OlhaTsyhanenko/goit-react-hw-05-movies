@@ -12,3 +12,25 @@
   font-size: 18px;
   font-weight: 600;
 }
+
+.reviewsList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.reviewsList_item {
+  padding-left: 15px;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.reviewsList_item::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #2196f3;
+  margin-right: 5px;
+}

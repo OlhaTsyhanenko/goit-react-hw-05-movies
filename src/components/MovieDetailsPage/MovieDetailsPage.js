@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { useParams, useRouteMatch, Route, NavLink, useLocation, useHistory } from "react-router-dom";
-import * as fetchApi from '../../api'
-import Cast from '../Cast/Cast';
-import Reviews from '../Reviews/Reviews';
+import * as fetchApi from '../../api';
+import Loader from '../Loader/Loader';
 import styles from '../MovieDetailsPage/MovieDetailsPage.module.css';
-import default_movieImg from '../default_movie.jpg';
+import default_movieImg from '../../images/default_movie.jpg';
+
+const Cast = lazy(() => import('../Cast/Cast' /* webpackChunkName: "Cast" */),);
+const Reviews = lazy(() => import('../Reviews/Reviews' /* webpackChunkName: "Reviews" */),);
 
 export default function HomePage() {
     const { movieId } = useParams();
@@ -17,11 +19,8 @@ export default function HomePage() {
         fetchApi.fetchAboutMovie(movieId).then(setMovie)
     }, [movieId])
 
-    console.log('location',location);
-
     const onGoBack = () => {
         history.push(location?.state?.from ?? '/movies');
-
     }
     
     return (
@@ -37,9 +36,9 @@ export default function HomePage() {
                     <p><span className={styles.item}>Popularity: </span>{movie.popularity}</p>
                     <p><span className={styles.item}>Overview: </span>{movie.overview}</p>
                     <p><span className={styles.item}>Genres: </span></p>
-                    <ul>
+                    <ul className={styles.genreList}>
                         {movie.genres.map(genre =>
-                            <li key={genre.id}>{genre.name}</li>)}
+                            <li key={genre.id} className={styles.genreList_item}>{genre.name}</li>)}
                     </ul>  
                 </div>
              </div>   
@@ -59,15 +58,15 @@ export default function HomePage() {
                         className={styles.link} activeClassName={styles.activeLink}>Reviews</NavLink>
                 </nav>
             </div>
-            
 
-
-            <Route path={`${path}/cast`}>
+            <Suspense fallback={<Loader />}>
+             <Route path={`${path}/cast`}>
                 <Cast /> 
             </Route>
             <Route path={`${path}/reviews`}>
                 <Reviews /> 
-            </Route>
+            </Route>   
+            </Suspense>
         </>
     )
 }

@@ -10,6 +10,28 @@
   font-weight: 700;
 }
 
+.genreList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.genreList_item {
+  padding-left: 15px;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.genreList_item::before {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #2196f3;
+  margin-right: 5px;
+}
+
 .navigation {
   display: flex;
   justify-content: space-between;

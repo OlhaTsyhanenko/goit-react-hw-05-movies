@@ -1,15 +1,13 @@
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import * as fetchApi from '../../api';
-// import fetchDataCast from '../../apiCast';
-import defaultImg from '../default.jpg';
+import defaultImg from '../../images/default.jpg';
 import styles from '../Cast/Cast.module.css';
 
 
 export default function Cast() {
     const { movieId } = useParams();
     const [cast, setCast] = useState([]);
-    // console.log(movieId);
 
     useEffect(() => {
         fetchApi.fetchCast(movieId).then(setCast)

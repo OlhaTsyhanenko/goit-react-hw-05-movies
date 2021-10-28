@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import queryString from 'query-string';
-import { useRouteMatch, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as fetchApi from '../../api';
-import Searchbar from './Searchbar';
-import MoviesGallery from './MoviesGallery';
-import Button from './Button';
-import Loader from './Loader';
+import Searchbar from '../../components/Searchbar/Searchbar';
+import MoviesGallery from '../../components/MoviesGallery/MoviesGallery';
+import Button from '../../components/Button/Button';
+import Loader from '../../components/Loader/Loader';
 
 export default function MoviesPage() {
   const history = useHistory();
